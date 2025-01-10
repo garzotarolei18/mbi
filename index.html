@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* common */
+        body{
+            background-color: #e8eaec!important;
+        }
+        form#caspioform > div > section{
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            width: -webkit-fill-available;
+            grid-column-gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            align-items: normal!important;
+            padding: 20px;
+        }
+        form#caspioform > div {
+            width: 100%;
+        }
+        .container{
+            width: 100%;
+            padding-right: 7.5px;
+            padding-left: 7.5px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        @media (min-width: 1200px) {
+            .container, .container-sm, .container-md, .container-lg, .container-xl {
+                max-width: 1140px;
+            }
+        }
+        /* end common */
+        /* Search */
+        .custom-search-container {
+            width: 100%;
+            text-align: left;
+            /* padding-top: 22px; */
+        }
+        .custom-search-container .custom-btn-filter {
+            margin-right: 7px;
+            margin-bottom: 10px;
+        }
+        .custom-btn-filter {
+            background-color: #005883;
+            border: 1px solid #005883;
+        }
+        .custom-btn-filter, .custom-btn-reset {
+            border-radius: 1px;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: Sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            height: auto;
+            margin: 0px 0px;
+            min-width: auto;
+            padding: 8px 20px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+        .custom-btn-reset {
+            background-color: #E02D1B;
+            border: 1px solid #E02D1B;
+        }
+        .reset-mobile {
+            display: none;
+        }
+        .text-right {
+            text-align: right !important;
+        }
+        .submit-d-none .cbSubmitButtonContainer,
+        .cbFormRequiredMarker,
+        .cbFormCommonError{
+            display: none!important;
+        }
+        label:not(.form-check-label):not(.custom-file-label) {
+            font-weight: 700;
+        }
+        .custom-btn-filter:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #005883;
+            color: #005883;
+            box-shadow: 0 3px 5px -3px #000000, 0 1px 1px -4px #000000;
+        }
+        .custom-btn-reset:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #E02D1B;
+            color: #E02D1B;
+            box-shadow: 0 3px 5px -3px #000000, 0 1px 1px -4px #000000;
+        }
+        /* end search */
+        /* Alert */
+        .alert {
+            display: flex;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .mb-30 {
+            margin-bottom: 30px !important;
+        }
+        .mt-20 {
+            margin-top: 20px !important;
+        }
+        .alert i {
+            font-size: 30px!important;
+            margin-right: 10px;
+        }
+        .alert span{
+            line-height: normal!important;
+        }
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -7.5px;
+            margin-left: -7.5px;
+        }
+        .col-12 {
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+            position: relative;
+            width: 100%;
+            padding-right: 7.5px;
+            padding-left: 7.5px;
+        }
+        .alert-info{
+            color: #055160;
+            background-color: #cff4fc;
+
+        }
+        .alert {
+            position: relative;
+            border: 1px solid transparent;
+            font-size: 16px;
+            line-height: 28px;
+        }
+        .pl-4, .px-4 {
+            padding-left: 1.5rem !important;
+        }
+        .pb-4, .py-4 {
+            padding-bottom: 1.5rem !important;
+        }
+        .pr-4, .px-4 {
+            padding-right: 1.5rem !important;
+        }
+        .pt-4, .py-4 {
+            padding-top: 1.5rem !important;
+        }
+        .shadow-sm {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+        }
+        .rounded-0 {
+            border-radius: 0 !important;
+        }
+        /* End Alert */
+        /* table */
+        #profileTableContainer{
+            padding: 35px;
+            background-color: #fff;
+        }
+        th, td{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        th{
+            color: #055160;
+        }
+        /* end table */
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-20">
+                <div class="custom-search-container submit-d-none">
+                    <script type="text/javascript" src="https://c8amf986.caspio.com/dp/0ddbd000afddaa77ad93462a81f5/emb"></script>
+                </div>
+                <div class="search-result-default-message-cont">
+                        <div class="alert alert-info mt-20 mb-30 shadow-sm py-4 px-4 rounded-0" role="alert">
+                            <span>
+                                <i class="fas fa-info-circle"></i>
+                            </span> Please select District, School and Date to view the report.
+                        </div>
+                    
+                </div>
+                <div class="part1" style="display: none;">
+                    <script type="text/javascript" src="https://c8amf986.caspio.com/dp/0ddbd0005e0f355265ae46ddb8e5/emb"></script>
+                </div>
+                <div id="part2" style="display: none;">
+            
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- script -->
+    <script>
+        // Helper function to wait for specific elements to load
+        function waitForElements({ selector, timeout = 10000 }) {
+            return new Promise((resolve, reject) => {
+                const startTime = Date.now();
+                
+                const interval = setInterval(() => {
+                    const elements = document.querySelectorAll(selector);
+                    if (elements.length > 0) {
+                        clearInterval(interval);
+                        resolve(`Elements matching selector "${selector}" found.`);
+                    }
+                    if (Date.now() - startTime >= timeout) {
+                        clearInterval(interval);
+                        reject(new Error(`Timeout: Elements matching selector "${selector}" not found within ${timeout}ms.`));
+                    }
+                }, 500);
+            });
+        }
+    
+        let rowValues = {
+            "COMBINED STANDARD DEVIATION EXHAUSTION": null,
+            "COMBINED STANDARD DEVIATION CYNICISM": null,
+            "COMBINED STANDARD DEVIATION EFFICACY": null,
+            "TOTAL RECORD COUNT": null
+        };
+        
+        let thresholds = {
+            "COMBINED STANDARD DEVIATION EXHAUSTION": null,
+            "COMBINED STANDARD DEVIATION CYNICISM": null,
+            "COMBINED STANDARD DEVIATION EFFICACY": null,
+            "TOTAL RECORD COUNT": null
+        };
+    
+        // Part 1 Process: Collects threshold and row data
+        async function processPart1() {
+            try {
+                // Wait for part1 elements to load
+                await waitForElements({ selector: '.part1 .cbResultSetTable' });
+    
+                var $resultTable = document.querySelector('.part1 .cbResultSetTable');
+                if ($resultTable) {
+                    var $firstRow = $resultTable.querySelector('tr[data-cb-name="data"]');
+    
+                    if ($firstRow) {
+                        var $secondTd = $firstRow.querySelectorAll('td')[1];
+                        var $fourthTd = $firstRow.querySelectorAll('td')[3];
+                        var $sixthTd = $firstRow.querySelectorAll('td')[5];
+    
+                        if ($secondTd && $fourthTd && $sixthTd) {
+                            // console.log($secondTd.textContent);
+                            // console.log($fourthTd.textContent);
+                            // console.log($sixthTd.textContent);
+                        }
+                    }
+    
+                    var targetLabels = [
+                        "COMBINED STANDARD DEVIATION EXHAUSTION",
+                        "COMBINED STANDARD DEVIATION CYNICISM",
+                        "COMBINED STANDARD DEVIATION EFFICACY",
+                        "TOTAL RECORD COUNT"
+                    ];
+    
+                    targetLabels.forEach(function(label) {
+                        var row = Array.from(document.querySelectorAll('tr.cbResultSetTotalsRow'))
+                            .find(tr => {
+                                var labelCell = tr.querySelector('.cbResultSetTotalsLabel');
+                                return labelCell && labelCell.textContent.trim().toUpperCase() === label;
+                            });
+    
+                        if (row) {
+                            var dataCell = row.querySelector('.cbResultSetTotalsDataCellNumberDate');
+                            var dataCellValue = dataCell ? parseFloat(dataCell.textContent) : 0;
+    
+                            rowValues[label] = {
+                                dataCellValue: dataCellValue
+                            };
+    
+                            if (label === "COMBINED STANDARD DEVIATION EXHAUSTION") {
+                                thresholds[label] = (parseFloat($secondTd.textContent) + (dataCellValue * 0.5)).toFixed(6);
+                            } else if (label === "COMBINED STANDARD DEVIATION CYNICISM") {
+                                thresholds[label] = (parseFloat($fourthTd.textContent) + (dataCellValue * 1.25)).toFixed(6);
+                            } else if (label === "COMBINED STANDARD DEVIATION EFFICACY") {
+                                thresholds[label] = (parseFloat($sixthTd.textContent) + (dataCellValue * 0.10)).toFixed(6);
+                            } else if (label === "TOTAL RECORD COUNT") {
+                                thresholds[label] = dataCellValue;
+                            }
+                        }
+                    });
+    
+                    // Dynamically load part2
+                    var script = document.createElement('script');
+                    const params = new URLSearchParams({
+                        exhaustion: thresholds["COMBINED STANDARD DEVIATION EXHAUSTION"],
+                        cynicism: thresholds["COMBINED STANDARD DEVIATION CYNICISM"],
+                        efficacy: thresholds["COMBINED STANDARD DEVIATION EFFICACY"]
+                    }).toString();
+    
+                    script.src = `https://c8amf986.caspio.com/dp/0ddbd000d228660673db4b8b8a6a/emb?${params}`;
+                    var container = document.getElementById("part2"); // Ensure containerID is defined
+                    if (container) {
+                        container.appendChild(script);
+                        // console.log('Caspio script added with parameters:', params);
+                    } else {
+                        // console.error('Container not found for Caspio script.');
+                    }
+                }
+            } catch (error) {
+                // console.error('Error processing part 1:', error);
+            }
+        }
+    
+        // Part 2 Process: Collects profile data and generates a table
+        // async function processPart2() {
+        //     try {
+        //         // Wait for part2 elements to load
+        //         await waitForElements({ selector: '#part2 .cbResultSetTable' });
+    
+        //         // Create a table for storing the profile data
+        //         const tableData = [
+        //             { profile: "Engaged", staffCount: 0, staffPercent: 0 },
+        //             { profile: "Ineffective", staffCount: 0, staffPercent: 0 },
+        //             { profile: "Overextended", staffCount: 0, staffPercent: 0 },
+        //             { profile: "Disengaged", staffCount: 0, staffPercent: 0 },
+        //             { profile: "Burnout", staffCount: 0, staffPercent: 0 },
+        //         ];
+    
+        //         // Retrieve the values from the page for each profile
+        //         const profileTypes = ["Engaged", "Ineffective", "Overextended", "Disengaged", "Burnout"];
+    
+        //         profileTypes.forEach(profile => {
+        //             let row = Array.from(document.querySelectorAll('#part2 tr.cbResultSetTotalsRow'))
+        //                 .find(tr => {
+        //                     var labelCell = tr.querySelector('.cbResultSetTotalsLabel');
+        //                     return labelCell && labelCell.textContent.toLowerCase().includes(`# of staff ${profile.toLowerCase()}`);
+        //                 });
+    
+        //             if (row) {
+        //                 var dataCell = row.querySelector('.cbResultSetTotalsDataCellNumberDate');
+        //                 var staffCountValue = dataCell ? parseFloat(dataCell.textContent) : 0;
+        //                 let staffPercent = ((staffCountValue / thresholds["TOTAL RECORD COUNT"]) * 100);
+        //                 console.log(staffPercent);
+    
+        //                 // Update the correct row in tableData
+        //                 const profileRow = tableData.find(item => item.profile === profile);
+        //                 if (profileRow) {
+        //                     profileRow.staffCount = staffCountValue;
+        //                     profileRow.staffPercent = staffPercent;
+        //                 }
+        //             }
+        //         });
+    
+        //         // Create a table to display the data
+        //         const tableContainer = document.createElement('div');
+        //         tableContainer.id = 'profileTableContainer';
+        //         tableContainer.style.marginTop = '20px';
+    
+        //         const table = document.createElement('table');
+        //         table.style.border = '1px solid black';
+        //         table.style.borderCollapse = 'collapse';
+        //         table.style.width = '100%';
+    
+        //         const headerRow = document.createElement('tr');
+        //         ['Profile Types', '# Of Staff', '% Of Staff'].forEach(headerText => {
+        //             const th = document.createElement('th');
+        //             th.textContent = headerText;
+        //             th.style.border = '1px solid black';
+        //             th.style.padding = '8px';
+        //             headerRow.appendChild(th);
+        //         });
+        //         table.appendChild(headerRow);
+    
+        //         let totalStaffPercent = 0;
+    
+        //         tableData.forEach(row => {
+        //             const tr = document.createElement('tr');
+        //             Object.values(row).forEach(value => {
+        //                 const td = document.createElement('td');
+        //                 td.textContent = value;
+        //                 td.style.border = '1px solid black';
+        //                 td.style.padding = '8px';
+        //                 tr.appendChild(td);
+        //             });
+        //             table.appendChild(tr);
+    
+        //             // Add the staff percentage to the total
+        //             totalStaffPercent += parseFloat(row.staffPercent);
+        //         });
+    
+        //         // Adjust the last row's staff percentage to ensure the total equals 100%
+        //         const lastProfile = tableData[tableData.length - 1];
+        //         lastProfile.staffPercent = (100 - totalStaffPercent + parseFloat(lastProfile.staffPercent));
+    
+        //         tableContainer.appendChild(table);
+        //         document.body.appendChild(tableContainer);
+        //         // console.log('Table created with profile data.');
+                
+        //         // Log the total of "% of Staff"
+        //         // console.log('Total % of Staff:', totalStaffPercent.toFixed(3));
+        //     } catch (error) {
+        //         // console.error('Error processing part 2:', error);
+        //     }
+        // }
+    
+        async function processPart2() {
+            try {
+                // Wait for part2 elements to load
+                await waitForElements({ selector: '#part2 .cbResultSetTable' });
+
+                // Create a table for storing the profile data
+                const tableData = [
+                    { profile: "Engaged", staffCount: 0, staffPercent: 0 },
+                    { profile: "Ineffective", staffCount: 0, staffPercent: 0 },
+                    { profile: "Overextended", staffCount: 0, staffPercent: 0 },
+                    { profile: "Disengaged", staffCount: 0, staffPercent: 0 },
+                    { profile: "Burnout", staffCount: 0, staffPercent: 0 },
+                ];
+
+                // Retrieve the values from the page for each profile
+                const profileTypes = ["Engaged", "Ineffective", "Overextended", "Disengaged", "Burnout"];
+
+                profileTypes.forEach(profile => {
+                    let row = Array.from(document.querySelectorAll('#part2 tr.cbResultSetTotalsRow'))
+                        .find(tr => {
+                            var labelCell = tr.querySelector('.cbResultSetTotalsLabel');
+                            return labelCell && labelCell.textContent.toLowerCase().includes(`# of staff ${profile.toLowerCase()}`);
+                        });
+
+                    if (row) {
+                        var dataCell = row.querySelector('.cbResultSetTotalsDataCellNumberDate');
+                        var staffCountValue = dataCell ? parseFloat(dataCell.textContent) : 0;
+                        let staffPercent = ((staffCountValue / thresholds["TOTAL RECORD COUNT"]) * 100).toFixed(3);
+                        console.log(staffPercent);
+
+                        // Update the correct row in tableData
+                        const profileRow = tableData.find(item => item.profile === profile);
+                        if (profileRow) {
+                            profileRow.staffCount = staffCountValue;
+                            profileRow.staffPercent = parseFloat(staffPercent);
+                        }
+                    }
+                });
+
+                // Create a table to display the data
+                const tableContainer = document.createElement('div');
+                tableContainer.id = 'profileTableContainer';
+
+                // Append the new element to the element with ID 'part2'
+                const part2 = document.getElementById('part2');
+                console.log(part2);
+                // Append the new div as a sibling
+
+
+
+
+
+
+                tableContainer.style.marginTop = '20px';
+
+                const table = document.createElement('table');
+                table.style.border = '1px solid black';
+                table.style.borderCollapse = 'collapse';
+                table.style.width = '100%';
+
+                const headerRow = document.createElement('tr');
+                ['Profile Types', '# Of Staff', '% Of Staff'].forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    th.style.border = '1px solid black';
+                    th.style.padding = '8px';
+                    headerRow.appendChild(th);
+                });
+                table.appendChild(headerRow);
+
+                let totalStaffPercent = 0;
+
+                tableData.forEach(row => {
+                    const tr = document.createElement('tr');
+                    Object.values(row).forEach(value => {
+                        const td = document.createElement('td');
+                        td.textContent = value;
+                        td.style.border = '1px solid black';
+                        td.style.padding = '8px';
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+
+                    // Add the staff percentage to the total
+                    totalStaffPercent += row.staffPercent;
+                });
+
+                // Adjust the last row's staff percentage to ensure the total equals 100%
+                // const lastProfile = tableData[tableData.length - 1];
+                // const adjustment = 100 - totalStaffPercent + lastProfile.staffPercent;
+                // lastProfile.staffPercent = adjustment % 1 === 0 ? adjustment : parseFloat(adjustment.toFixed(3));
+
+                // // Update the table with adjusted values
+                // const lastRow = table.querySelector('tr:last-child');
+                // if (lastRow) {
+                //     const lastCell = lastRow.lastChild;
+                //     if (lastCell) {
+                //         lastCell.textContent = lastProfile.staffPercent;
+                //     }
+                // }
+
+                tableContainer.appendChild(table);
+                const targetElement = document.querySelector('.container .row .col-12.mt-20');
+                if (targetElement) {
+                    targetElement.appendChild(tableContainer);
+                }
+                // document.body.appendChild(tableContainer);
+
+                // console.log('Table created with profile data.');
+
+                // Log the total of "% of Staff"
+                // console.log('Total % of Staff:', totalStaffPercent.toFixed(3));
+            } catch (error) {
+                // console.error('Error processing part 2:', error);
+            }
+        }
+
+
+
+
+        // Main execution: Process part1, then part2
+        async function main() {
+            await processPart1();  // Wait for and process part1
+            await processPart2();  // After part1 is done, wait for and process part2
+        }
+
+        // Helper function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                District_Name: params.get("District_Name"),
+                School_Name: params.get("School_Name"),
+                From_Date: params.get("From_Date"),
+                End_Date: params.get("End_Date")
+            };
+        }
+
+        // Check if required URL parameters are available
+        function checkParamsAndExecute() {
+            const { District_Name, School_Name, From_Date, End_Date } = getUrlParams();
+
+            if (District_Name && School_Name && From_Date && End_Date) {
+                document.querySelector('.search-result-default-message-cont').style.display = 'none';
+
+                main();
+                
+            } else {
+                console.error("Missing one or more required URL parameters.");
+            }
+        }
+
+        // Call the function to check parameters and execute
+        checkParamsAndExecute();
+    </script>
+    
+        
+    
+        
+</body>
+
+</html>
