@@ -166,7 +166,7 @@
             padding: 35px;
             background-color: #fff;
         }
-        th, td{
+        th, td, #profileTableContainer p{
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
         }
@@ -247,6 +247,7 @@
                 await waitForElements({ selector: '.part1 .cbResultSetTable' });
     
                 var $resultTable = document.querySelector('.part1 .cbResultSetTable');
+
                 if ($resultTable) {
                     var $firstRow = $resultTable.querySelector('tr[data-cb-name="data"]');
     
@@ -315,7 +316,29 @@
                 }
             } catch (error) {
                 // console.error('Error processing part 1:', error);
+                // No records found
+                // Create a table to display the data
+                const tableContainer = document.createElement('div');
+                tableContainer.id = 'profileTableContainer';
+
+                // Append the new element to the element with ID 'part2'
+                const part2 = document.getElementById('part2');
+                console.log(part2);
+                // Append the new div as a sibling
+                tableContainer.style.marginTop = '20px';
+
+                const table = document.createElement('p');
+                table.textContent = "No Records Found.";
+
+                tableContainer.appendChild(table);
+                const targetElement = document.querySelector('.container .row .col-12.mt-20');
+                if (targetElement) {
+                    targetElement.appendChild(tableContainer);
+                }
             }
+
+            
+
         }
     
         // Part 2 Process: Collects profile data and generates a table
